@@ -48,7 +48,7 @@ class MqlHistoryReader
 		$data = fread($this->fp, 8);
 		if(strlen($data) == 0) return false;
 	
-		$time = date('Y-m-d H:i:s', $this->_read_long($data));
+		$time = $this->_read_long($data);
 		$data = unpack('dopen/dhigh/dlow/dclose', fread($this->fp, 8 * 4));
 		$volume = $this->_read_long();
 		$spread = $this->_read_int();
