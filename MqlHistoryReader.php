@@ -67,6 +67,14 @@ class MqlHistoryReader
 	
 	function _read_long($data = NULL) {
 		if(!$data) $data = fread($this->fp, 8);
+		
+		// 64 bit Linux OS
+		if(PHP_INT_SIZE == 8) {
+			$data = unpack('Lint', $data);
+			return $data['int'];
+		}
+		
+		// 64/32 bit Windows OS
 		$data = unpack('La/Lb', $data);
 		return $data['a'] << 32 | $data['b'];
 	}
