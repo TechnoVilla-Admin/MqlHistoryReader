@@ -1,4 +1,5 @@
 <?php
+
 include('MqlHistoryReader.php');
 header('content-type: text-plain');
 $reader = new MqlHistoryReader();
@@ -8,3 +9,5 @@ print_r($reader->get_headers());
 // Print history
 while($data = $reader->read()) print_r($data);
 $reader->close();
+
+?>
